@@ -5,14 +5,13 @@
 class Square : public Rectangle
 {
 public:
+    using Rectangle::Rectangle;
+    Square() = delete;
     Square(double x);
-    Square(const Square & other);
+    Square(const Square & other) = default;
 
-    double getArea();
-    double getPerimeter();
-    void print();
-
-private:
-    double getY(); // should not have Y dimension
-    Square();
+    double getArea() const override;
+    double getY() = delete;
+    double getPerimeter() const override;
+    void print() const override;
 };

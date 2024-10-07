@@ -10,7 +10,7 @@
 
 using namespace std;
 
-typedef vector<shared_ptr<Shape>> Collection;
+using Collection = vector<shared_ptr<Shape>>;
 
 bool sortByArea(shared_ptr<Shape> first, shared_ptr<Shape> second)
 {
@@ -35,23 +35,29 @@ bool areaLessThan10(shared_ptr<Shape> s)
 
 void printCollectionElements(const Collection& collection)
 {
-    for(Collection::const_iterator it = collection.begin(); it != collection.end(); ++it)
-        if(*it)
-            (*it)->print();
+    // for(auto it = collection.begin(); it != collection.end(); ++it)
+    //     if(*it)
+    //         (*it)->print();
+    for(const auto& el: collection)
+        if(el)
+            el->print();
 }
 
 void printAreas(const Collection& collection)
 {
-    for(vector<shared_ptr<Shape>>::const_iterator it = collection.begin(); it != collection.end(); ++it)
-        if(*it)
-            cout << (*it)->getArea() << std::endl;
+    // for(auto it = collection.begin(); it != collection.end(); ++it)
+    //     if(*it)
+    //         cout << (*it)->getArea() << std::endl;
+    for(const auto& el : collection)
+        if(el)
+            el->getArea();
 }
 
 void findFirstShapeMatchingPredicate(const Collection& collection,
                                      bool (*predicate)(shared_ptr<Shape> s),
                                      std::string info)
 {
-    Collection::const_iterator iter = std::find_if(collection.begin(), collection.end(), predicate);
+    auto iter = std::find_if(collection.begin(), collection.end(), predicate);
     if(*iter != nullptr)
     {
         cout << "First shape matching predicate: " << info << endl;
@@ -65,14 +71,14 @@ void findFirstShapeMatchingPredicate(const Collection& collection,
 
 int main()
 {
-    Collection shapes;
-    shapes.push_back(make_shared<Circle>(2.0));
-    shapes.push_back(make_shared<Circle>(3.0));
-    shapes.push_back(nullptr);
-    shapes.push_back(make_shared<Circle>(4.0));
-    shapes.push_back(make_shared<Rectangle>(10.0, 5.0));
-    shapes.push_back(make_shared<Square>(3.0));
-    shapes.push_back(make_shared<Circle>(4.0));
+    Collection shapes = {make_shared<Circle>(2.0),
+                         make_shared<Circle>(3.0),
+                         nullptr,
+                         make_shared<Circle>(4.0),
+                         make_shared<Rectangle>(10.0, 5.0),
+                         make_shared<Square>(3.0),
+                         make_shared<Circle>(4.0)};
+
     printCollectionElements(shapes);
 
     cout << "Areas before sort: " << std::endl;
@@ -88,6 +94,9 @@ int main()
 
     findFirstShapeMatchingPredicate(shapes, perimeterBiggerThan20, "perimeter bigger than 20");
     findFirstShapeMatchingPredicate(shapes, areaLessThan10, "area less than 10");
+
+    Collection collectionWithColors = {make_shared<Circle>(Color::GREEN), make_shared<Circle>(Color::BLUE), make_shared<Circle>(Color::RED), make_shared<Circle>(Color::GREEN)};
+    printCollectionElements(collectionWithColors);
 
     return 0;
 }

@@ -6,11 +6,6 @@ Circle::Circle(double r)
     : r_(r)
 {}
 
-Circle::Circle(const Circle & other)
-{
-    r_ = other.getRadius();
-}
-
 static_assert(M_PI != 3.14, "M_PI is not precise");
 
 double Circle::getArea() const
@@ -32,5 +27,6 @@ void Circle::print() const
 {
     std::cout << "Circle: radius: " << getRadius() << std::endl
               << "          area: " << getArea() << std::endl
-              << "     perimeter: " << getPerimeter() << std::endl;
+              << "     perimeter: " << getPerimeter() << std::endl
+              << "         color: " << getColor() << std::endl;
 }
