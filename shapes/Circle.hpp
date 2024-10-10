@@ -18,3 +18,5 @@ public:
 private:
     double r_  = 1.0;
 };
+
+[[deprecated("Please use std::numbers::pi instead")]] double getPi();

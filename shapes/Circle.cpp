@@ -1,21 +1,29 @@
 #include "Circle.hpp"
 #include <math.h>
 #include <iostream>
+#include <numbers>
+
+namespace num = std::numbers;
+
+static_assert(M_PI != 3.14, "M_PI is not precise");
+
+double getPi()
+{
+    return M_PI;
+}
 
 Circle::Circle(double r)
     : r_(r)
 {}
 
-static_assert(M_PI != 3.14, "M_PI is not precise");
-
 double Circle::getArea() const
 {
-    return M_PI * r_ * r_;
+    return num::pi * r_ * r_;
 }
 
 double Circle::getPerimeter() const
 {
-    return 2 * M_PI * r_;
+    return 2 * num::pi * r_;
 }
 
 double Circle::getRadius() const
