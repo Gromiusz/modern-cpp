@@ -11,42 +11,26 @@
 #include "Square.hpp"
 #include "Circle.hpp"
 
-
 using namespace std;
 
 using Collection = vector<shared_ptr<Shape>>;
 
-// bool sortByArea(shared_ptr<Shape> first, shared_ptr<Shape> second)
-// {
-//     if (first == nullptr || second == nullptr)
-//         return false;
-//     return (first->getArea() < second->getArea());
-// }
-auto sortByArea = [](shared_ptr<Shape> first, shared_ptr<Shape> second) {
+auto sortByArea = [](shared_ptr<Shape> first, shared_ptr<Shape> second)
+{
     if (first == nullptr || second == nullptr)
         return false;
-    return (first->getArea() < second->getArea());  
+    return (first->getArea() < second->getArea());
 };
 
-// bool perimeterBiggerThan20(shared_ptr<Shape> s)
-// {
-//     if (s)
-//         return (s->getPerimeter() > 20);
-//     return false;
-// }
-auto perimeterBiggerThan20 = [](shared_ptr<Shape> s) {
+auto perimeterBiggerThan20 = [](shared_ptr<Shape> s)
+{
     if (s)
         return (s->getPerimeter() > 20);
     return false;
 };
 
-// bool areaLessThan10(shared_ptr<Shape> s)
-// {
-//     if (s)
-//         return (s->getArea() < 10);
-//     return false;
-// }
-auto areaLessThan10(shared_ptr<Shape> s){
+auto areaLessThan10(shared_ptr<Shape> s)
+{
     if (s)
         return (s->getArea() < 10);
     return false;
@@ -120,7 +104,7 @@ int main()
     std::cout << alignof(Circle) << std::endl;
 
     std::map<std::shared_ptr<Shape>, double> perimeters;
-    constexpr  uint8_t the_way_to_do_that = 2;
+    constexpr uint8_t the_way_to_do_that = 2;
     switch (the_way_to_do_that)
     {
     case 1:
@@ -134,28 +118,26 @@ int main()
         break;
 
     case 2:
-        std::transform(shapes.begin(), shapes.end(), inserter(perimeters, perimeters.begin()), [](auto& shape){
+        std::transform(shapes.begin(), shapes.end(), inserter(perimeters, perimeters.begin()), [](auto &shape)
+                       {
                                                                                                 auto perimeter = 0.;
                                                                                                     if(shape) 
                                                                                                         perimeter = shape->getPerimeter();
-                                                                                                    return std::make_pair(shape, perimeter);
-                                                                                                });
+                                                                                                    return std::make_pair(shape, perimeter); });
         break;
-    
+
     default:
         break;
     }
 
     for (const auto &[shape, perimeter] : perimeters)
     {
-        if(shape)
+        if (shape)
         {
             shape->print();
             std::cout << "\nPerimeter: " << perimeter << "\n\n";
         }
-        
     }
-   
 
     return 0;
 }
