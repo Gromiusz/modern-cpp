@@ -38,9 +38,6 @@ auto areaLessThan10(shared_ptr<Shape> s)
 
 void printCollectionElements(const Collection &collection)
 {
-    // for(auto it = collection.begin(); it != collection.end(); ++it)
-    //     if(*it)
-    //         (*it)->print();
     for (const auto &el : collection)
         if (el)
             el->print();
@@ -48,9 +45,6 @@ void printCollectionElements(const Collection &collection)
 
 void printAreas(const Collection &collection)
 {
-    // for(auto it = collection.begin(); it != collection.end(); ++it)
-    //     if(*it)
-    //         cout << (*it)->getArea() << std::endl;
     for (const auto &el : collection)
         if (el)
             el->getArea();
