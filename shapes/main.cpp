@@ -7,6 +7,7 @@
 #include "Rectangle.hpp"
 #include "Square.hpp"
 #include "Circle.hpp"
+#include <map>
 
 using namespace std;
 
@@ -14,51 +15,51 @@ using Collection = vector<shared_ptr<Shape>>;
 
 bool sortByArea(shared_ptr<Shape> first, shared_ptr<Shape> second)
 {
-    if(first == nullptr || second == nullptr)
+    if (first == nullptr || second == nullptr)
         return false;
     return (first->getArea() < second->getArea());
 }
 
 bool perimeterBiggerThan20(shared_ptr<Shape> s)
 {
-    if(s)
+    if (s)
         return (s->getPerimeter() > 20);
     return false;
 }
 
 bool areaLessThan10(shared_ptr<Shape> s)
 {
-    if(s)
+    if (s)
         return (s->getArea() < 10);
     return false;
 }
 
-void printCollectionElements(const Collection& collection)
+void printCollectionElements(const Collection &collection)
 {
     // for(auto it = collection.begin(); it != collection.end(); ++it)
     //     if(*it)
     //         (*it)->print();
-    for(const auto& el: collection)
-        if(el)
+    for (const auto &el : collection)
+        if (el)
             el->print();
 }
 
-void printAreas(const Collection& collection)
+void printAreas(const Collection &collection)
 {
     // for(auto it = collection.begin(); it != collection.end(); ++it)
     //     if(*it)
     //         cout << (*it)->getArea() << std::endl;
-    for(const auto& el : collection)
-        if(el)
+    for (const auto &el : collection)
+        if (el)
             el->getArea();
 }
 
-void findFirstShapeMatchingPredicate(const Collection& collection,
+void findFirstShapeMatchingPredicate(const Collection &collection,
                                      bool (*predicate)(shared_ptr<Shape> s),
                                      std::string info)
 {
     auto iter = std::find_if(collection.begin(), collection.end(), predicate);
-    if(*iter != nullptr)
+    if (*iter != nullptr)
     {
         cout << "First shape matching predicate: " << info << endl;
         (*iter)->print();
@@ -98,6 +99,22 @@ int main()
     Collection collectionWithColors = {make_shared<Circle>(Color::GREEN), make_shared<Circle>(Color::BLUE), make_shared<Circle>(Color::RED), make_shared<Circle>(Color::GREEN)};
     printCollectionElements(collectionWithColors);
 
+    std::cout << alignof(Circle) << std::endl;
+
+    std::map<std::shared_ptr<Shape>, double> perimeters;
+    for (const auto &shape : shapes)
+    {
+        if (shape)
+        {
+            perimeters.emplace(shape, shape->getPerimeter());
+        }
+    }
+
+    for (const auto &[shape, perimeter] : perimeters)
+    {
+        shape->print();
+        std::cout << "\nPerimeter: " << perimeter << "\n\n";
+    }
+
     return 0;
 }
-
