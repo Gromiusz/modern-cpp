@@ -29,7 +29,7 @@ auto perimeterBiggerThan20 = [](shared_ptr<Shape> s)
     return false;
 };
 
-auto areaLessThan10(shared_ptr<Shape> s)
+auto areaLessThan10 = [](shared_ptr<Shape> s)
 {
     if (s)
         return (s->getArea() < 10);
