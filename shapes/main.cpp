@@ -3,11 +3,14 @@
 #include <algorithm>
 #include <string>
 #include <memory>
+#include <map>
+#include <tuple>
+
 #include "Shape.hpp"
 #include "Rectangle.hpp"
 #include "Square.hpp"
 #include "Circle.hpp"
-#include <map>
+
 
 using namespace std;
 
@@ -102,19 +105,42 @@ int main()
     std::cout << alignof(Circle) << std::endl;
 
     std::map<std::shared_ptr<Shape>, double> perimeters;
-    for (const auto &shape : shapes)
+    constexpr  uint8_t the_way_to_do_that = 2;
+    switch (the_way_to_do_that)
     {
-        if (shape)
+    case 1:
+        for (const auto &shape : shapes)
         {
-            perimeters.emplace(shape, shape->getPerimeter());
+            if (shape)
+            {
+                perimeters.emplace(shape, shape->getPerimeter());
+            }
         }
+        break;
+
+    case 2:
+        std::transform(shapes.begin(), shapes.end(), inserter(perimeters, perimeters.begin()), [](auto& shape){
+                                                                                                auto perimeter = 0.;
+                                                                                                    if(shape) 
+                                                                                                        perimeter = shape->getPerimeter();
+                                                                                                    return std::make_pair(shape, perimeter);
+                                                                                                });
+        break;
+    
+    default:
+        break;
     }
 
     for (const auto &[shape, perimeter] : perimeters)
     {
-        shape->print();
-        std::cout << "\nPerimeter: " << perimeter << "\n\n";
+        if(shape)
+        {
+            shape->print();
+            std::cout << "\nPerimeter: " << perimeter << "\n\n";
+        }
+        
     }
+   
 
     return 0;
 }
