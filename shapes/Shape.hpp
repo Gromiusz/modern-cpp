@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <memory>
 
 enum class Color : unsigned char
 {
@@ -25,3 +26,4 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& os, Color c);
+

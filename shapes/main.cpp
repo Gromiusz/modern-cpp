@@ -75,10 +75,11 @@ void findFirstShapeMatchingPredicate(const Collection &collection,
 }
 
 template<class DerivedType, class... Arguments>
-std::shared_ptr<Shape> make_shape(std::string kind, Arguments&&... args)
+std::shared_ptr<Shape> make_shape(Arguments&&... args)
 {
     return std::make_shared<DerivedType>(std::forward<Arguments>(args)...);
 }
+
 
 int main()
 {
@@ -147,6 +148,9 @@ int main()
         }
     }
 
+    auto circle = make_shape<Circle>(4);
+    auto rectangle = make_shape<Rectangle>(2, 1);
+    auto square2 = make_shape<Square>(8);
 
     return 0;
 }
