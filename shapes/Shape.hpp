@@ -5,13 +5,14 @@ enum class Color : unsigned char
 {
     RED,
     GREEN,
-    BLUE
+    BLUE,
+    Default = RED
 };
 
 class Shape
 {
 protected:
-    Color color = Color::RED;
+    Color color = Color::Default;
     
 public:
     virtual ~Shape() {}

@@ -74,6 +74,12 @@ void findFirstShapeMatchingPredicate(const Collection &collection,
     }
 }
 
+template<class DerivedType, class... Arguments>
+std::shared_ptr<Shape> make_shape(std::string kind, Arguments&&... args)
+{
+    return std::make_shared<DerivedType>(std::forward<Arguments>(args)...);
+}
+
 int main()
 {
     Collection shapes = {make_shared<Circle>(2.0),
@@ -140,6 +146,7 @@ int main()
             std::cout << "\nPerimeter: " << perimeter << "\n\n";
         }
     }
+
 
     return 0;
 }

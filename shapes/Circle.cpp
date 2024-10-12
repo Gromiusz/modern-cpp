@@ -12,9 +12,15 @@ double getPi()
     return M_PI;
 }
 
+Circle::Circle(double r, Color c)
+    : Shape(c), r_(r)
+{
+}
+
 Circle::Circle(double r)
-    : r_(r)
-{}
+    : Circle(r, Color::Default)
+{
+}
 
 double Circle::getArea() const
 {
