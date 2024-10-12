@@ -26,3 +26,8 @@ void Square::print() const
               << "     perimeter: " << getPerimeter() << std::endl
               << "         color: " << getColor() << std::endl;
 }
+
+void Square::accept(ShapeVisitorBase& visitor)
+{
+    visitor.visit(*this);
+}

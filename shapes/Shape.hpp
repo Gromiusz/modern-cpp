@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <memory>
+#include "Visitor.hpp"
 
 enum class Color : unsigned char
 {
@@ -23,6 +24,7 @@ public:
     virtual double getPerimeter() const = 0;
     virtual void print() const;
     virtual Color getColor() const;
+    virtual void accept(ShapeVisitorBase&) = 0;
 };
 
 std::ostream& operator<<(std::ostream& os, Color c);

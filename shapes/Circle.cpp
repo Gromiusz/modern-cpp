@@ -44,3 +44,8 @@ void Circle::print() const
               << "     perimeter: " << getPerimeter() << std::endl
               << "         color: " << getColor() << std::endl;
 }
+
+void Circle::accept(ShapeVisitorBase& visitor)
+{
+    visitor.visit(*this);
+}

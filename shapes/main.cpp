@@ -11,6 +11,7 @@
 #include "Rectangle.hpp"
 #include "Square.hpp"
 #include "Circle.hpp"
+#include "Visitor.hpp"
 
 using namespace std;
 
@@ -74,12 +75,20 @@ void findFirstShapeMatchingPredicate(const Collection &collection,
     }
 }
 
-template<class DerivedType, class... Arguments>
-std::shared_ptr<Shape> make_shape(Arguments&&... args)
+template <class DerivedType, class... Arguments>
+std::shared_ptr<Shape> make_shape(Arguments &&...args)
 {
     return std::make_shared<DerivedType>(std::forward<Arguments>(args)...);
 }
 
+void visitAll(Collection &collection, ShapeVisitorBase &visitor)
+{
+    for (const auto &el : collection)
+    {
+        if(el)
+            el->accept(visitor);
+    }
+}
 
 int main()
 {
@@ -151,6 +160,9 @@ int main()
     auto circle = make_shape<Circle>(4);
     auto rectangle = make_shape<Rectangle>(2, 1);
     auto square2 = make_shape<Square>(8);
+
+    PrintingVisitor printigVisitor;
+    visitAll(shapes, printigVisitor);
 
     return 0;
 }

@@ -15,6 +15,7 @@ public:
     double getPerimeter() const override;
     double getRadius() const;
     void print() const override;
+    void accept(ShapeVisitorBase&) override;
 
 private:
     double r_  = 1.0;

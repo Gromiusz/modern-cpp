@@ -42,3 +42,8 @@ void Rectangle::print() const
               << "     perimeter: " << getPerimeter() << std::endl
               << "         color: " << getColor() << std::endl;
 }
+
+void Rectangle::accept(ShapeVisitorBase& visitor)
+{
+    visitor.visit(*this);
+}

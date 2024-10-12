@@ -16,6 +16,7 @@ public:
     virtual double getX() const final;
     double getY() const;
     void print() const override;
+    void accept(ShapeVisitorBase&) override;
 
 private:
     double x_ = 1.0;

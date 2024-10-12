@@ -10,6 +10,7 @@ set(SRC_LIST
     Rectangle.cpp
     Square.cpp
     Shape.cpp
+    Visitor.cpp
     main.cpp
 )
 

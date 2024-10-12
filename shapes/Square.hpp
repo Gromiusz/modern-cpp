@@ -15,4 +15,5 @@ public:
     double getY() = delete;
     double getPerimeter() const noexcept override;
     void print() const override;
+    void accept(ShapeVisitorBase&) override;
 };
